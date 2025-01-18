@@ -14,6 +14,17 @@ function App() {
     return day;
   }
 
+  const getWeatherIcon = (main) => {
+    switch (main) {
+      case "Rain":
+        return <i className="bx bx-cloud-rain"></i>;
+      case "Clouds":
+        return <i className="bx bx-cloud"></i>;
+      default:
+        return <i className="bx bx-sun"></i>;
+    }
+  };
+
   const day = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
@@ -50,7 +61,11 @@ function App() {
           </div>
         </div>
         <div className="today-weather">
-          <i className="bx bx-sun"></i>
+          {weather !== "Rain" ? (
+            <i className="bx bx-sun"></i>
+          ) : (
+            <i class="bx bx-cloud-rain"></i>
+          )}
           {weatherData ? (
             <h1 className="weather-temp">{weatherData.list[0].temp.min}°C</h1>
           ) : (
@@ -78,7 +93,7 @@ function App() {
 
         <ul className="days-list">
           <li>
-            <i className="bx bx-cloud"></i>
+            {weatherData && getWeatherIcon(weatherData.list[1].weather[0].main)}
             {weatherData ? (
               <span>{convertTimestamp(weatherData.list[1].dt)}</span>
             ) : (
@@ -91,7 +106,7 @@ function App() {
             )}
           </li>
           <li>
-            <i className="bx bx-sun"></i>
+            {weatherData && getWeatherIcon(weatherData.list[2].weather[0].main)}
             {weatherData ? (
               <span>{convertTimestamp(weatherData.list[2].dt)}</span>
             ) : (
@@ -104,7 +119,7 @@ function App() {
             )}
           </li>
           <li>
-            <i className="bx bx-cloud-rain"></i>
+            {weatherData && getWeatherIcon(weatherData.list[3].weather[0].main)}
             {weatherData ? (
               <span>{convertTimestamp(weatherData.list[3].dt)}</span>
             ) : (
@@ -117,7 +132,7 @@ function App() {
             )}
           </li>
           <li>
-            <i className="bx bx-cloud-drizzle"></i>
+            {weatherData && getWeatherIcon(weatherData.list[4].weather[0].main)}
             {weatherData ? (
               <span>{convertTimestamp(weatherData.list[4].dt)}</span>
             ) : (
