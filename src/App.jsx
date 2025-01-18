@@ -5,13 +5,23 @@ function App() {
   const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city_Name}&appid=${api_key}&units=metric`;
   const response = fetch(currentWeatherApiURL);
   console.log(response);
+  const day = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    // year: "numeric",
+    // month: "long",
+    // day: "numeric",
+  });
+  const date = new Date();
+  const formattedDate = `${date.getDate()} ${date.toLocaleDateString("en-US", {
+    month: "long",
+  })} ${date.getFullYear()}`;
   return (
     <div className="container">
       <div className="left-info">
         <div className="pic-gradient"></div>
         <div className="today-info">
-          <h2>Friday</h2>
-          <span>28 July 2023</span>
+          <h2>{day}</h2>
+          <span>{formattedDate}</span>
           <div>
             <i className="bx bx-current-location"></i>
             <span>Paris, FR</span>
