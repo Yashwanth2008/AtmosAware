@@ -1,5 +1,13 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 function App() {
+  const [weather, setWeather] = useState(null);
+  const [DayOne, setDayOne] = useState(null);
+
+  const api_key = "c712b05b078a11c8cfef9b3520f01017";
+  const city_Name = "Chennai";
+  const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city_Name}&appid=${api_key}&units=metric&cnt=5`;
+
   const day = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
@@ -8,12 +16,21 @@ function App() {
     month: "long",
   })} ${date.getFullYear()}`;
 
-  const api_key = "c712b05b078a11c8cfef9b3520f01017";
-  const city_Name = "Chennai";
-  const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city_Name}&appid=${api_key}&units=metric&cnt=5`;
-  const response = fetch(currentWeatherApiURL);
-  console.log(response);
-
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      try {
+        const response = await fetch(currentWeatherApiURL);
+        const data = await response.json();
+        if (response.ok) {
+          setWeather(data.list[0].weather[0].main);
+          setDayOne(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchWeatherData();
+  }, []);
   return (
     <div className="container">
       <div className="left-info">
@@ -28,8 +45,12 @@ function App() {
         </div>
         <div className="today-weather">
           <i className="bx bx-sun"></i>
-          <h1 className="weather-temp">25°C</h1>
-          <h3>Sunny</h3>
+          {DayOne ? (
+            <h1 className="weather-temp">{DayOne.list[0].temp.min}°C</h1>
+          ) : (
+            <h1 className="weather-temp">...°C</h1>
+          )}
+          <h3>{weather}</h3>
         </div>
       </div>
 
