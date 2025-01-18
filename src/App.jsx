@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 function App() {
   const [weather, setWeather] = useState(null);
-  const [currentDay, setCurrentDay] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
 
   const api_key = "c712b05b078a11c8cfef9b3520f01017";
   const city_Name = "Chennai";
@@ -29,7 +29,7 @@ function App() {
         const data = await response.json();
         if (response.ok) {
           setWeather(data.list[0].weather[0].main);
-          setCurrentDay(data);
+          setWeatherData(data);
         }
       } catch (error) {
         console.log(error);
@@ -51,8 +51,8 @@ function App() {
         </div>
         <div className="today-weather">
           <i className="bx bx-sun"></i>
-          {currentDay ? (
-            <h1 className="weather-temp">{currentDay.list[0].temp.min}°C</h1>
+          {weatherData ? (
+            <h1 className="weather-temp">{weatherData.list[0].temp.min}°C</h1>
           ) : (
             <h1 className="weather-temp">...°C</h1>
           )}
@@ -79,52 +79,52 @@ function App() {
         <ul className="days-list">
           <li>
             <i className="bx bx-cloud"></i>
-            {currentDay ? (
-              <span>{convertTimestamp(currentDay.list[1].dt)}</span>
+            {weatherData ? (
+              <span>{convertTimestamp(weatherData.list[1].dt)}</span>
             ) : (
               <span>...</span>
             )}
-            {currentDay ? (
-              <span className="day-temp">{currentDay.list[1].temp.min}°C</span>
+            {weatherData ? (
+              <span className="day-temp">{weatherData.list[1].temp.min}°C</span>
             ) : (
               <span className="day-temp">..°C</span>
             )}
           </li>
           <li>
             <i className="bx bx-sun"></i>
-            {currentDay ? (
-              <span>{convertTimestamp(currentDay.list[2].dt)}</span>
+            {weatherData ? (
+              <span>{convertTimestamp(weatherData.list[2].dt)}</span>
             ) : (
               <span>...</span>
             )}
-            {currentDay ? (
-              <span className="day-temp">{currentDay.list[2].temp.min}°C</span>
+            {weatherData ? (
+              <span className="day-temp">{weatherData.list[2].temp.min}°C</span>
             ) : (
               <span className="day-temp">..°C</span>
             )}
           </li>
           <li>
             <i className="bx bx-cloud-rain"></i>
-            {currentDay ? (
-              <span>{convertTimestamp(currentDay.list[3].dt)}</span>
+            {weatherData ? (
+              <span>{convertTimestamp(weatherData.list[3].dt)}</span>
             ) : (
               <span>...</span>
             )}
-            {currentDay ? (
-              <span className="day-temp">{currentDay.list[3].temp.min}°C</span>
+            {weatherData ? (
+              <span className="day-temp">{weatherData.list[3].temp.min}°C</span>
             ) : (
               <span className="day-temp">..°C</span>
             )}
           </li>
           <li>
             <i className="bx bx-cloud-drizzle"></i>
-            {currentDay ? (
-              <span>{convertTimestamp(currentDay.list[4].dt)}</span>
+            {weatherData ? (
+              <span>{convertTimestamp(weatherData.list[4].dt)}</span>
             ) : (
               <span>...</span>
             )}
-            {currentDay ? (
-              <span className="day-temp">{currentDay.list[4].temp.min}°C</span>
+            {weatherData ? (
+              <span className="day-temp">{weatherData.list[4].temp.min}°C</span>
             ) : (
               <span className="day-temp">..°C</span>
             )}
