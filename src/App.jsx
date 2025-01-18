@@ -1,20 +1,19 @@
 import "./App.css";
 function App() {
-  const api_key = "c712b05b078a11c8cfef9b3520f01017";
-  const city_Name = "Chennai";
-  const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city_Name}&appid=${api_key}&units=metric`;
-  const response = fetch(currentWeatherApiURL);
-  console.log(response);
   const day = new Date().toLocaleDateString("en-US", {
     weekday: "long",
-    // year: "numeric",
-    // month: "long",
-    // day: "numeric",
   });
   const date = new Date();
   const formattedDate = `${date.getDate()} ${date.toLocaleDateString("en-US", {
     month: "long",
   })} ${date.getFullYear()}`;
+
+  const api_key = "c712b05b078a11c8cfef9b3520f01017";
+  const city_Name = "Chennai";
+  const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city_Name}&appid=${api_key}&units=metric&cnt=5`;
+  const response = fetch(currentWeatherApiURL);
+  console.log(response);
+
   return (
     <div className="container">
       <div className="left-info">
@@ -24,7 +23,7 @@ function App() {
           <span>{formattedDate}</span>
           <div>
             <i className="bx bx-current-location"></i>
-            <span>Paris, FR</span>
+            <span>{city_Name}</span>
           </div>
         </div>
         <div className="today-weather">
