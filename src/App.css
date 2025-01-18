@@ -121,6 +121,7 @@ body {
   align-items: center;
   border-radius: 10px;
   transition: all 0.3s ease;
+  width: 100px;
 }
 
 .days-list li .bx {

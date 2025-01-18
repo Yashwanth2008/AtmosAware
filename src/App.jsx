@@ -79,15 +79,27 @@ function App() {
         <div className="day-info">
           <div>
             <span className="title">PRECIPITATION</span>
-            <span className="value">4 %</span>
+            {weatherData ? (
+              <span className="value">{weatherData.list[0].rain} mm</span>
+            ) : (
+              <span className="value">4 mm</span>
+            )}
           </div>
           <div>
             <span className="title">HUMIDITY</span>
-            <span className="value">34 %</span>
+            {weatherData ? (
+              <span className="value">{weatherData.list[0].humidity}</span>
+            ) : (
+              <span className="value">34 %</span>
+            )}
           </div>
           <div>
             <span className="title">WIND SPEED</span>
-            <span className="value">6 km/h</span>
+            {weatherData ? (
+              <span className="value">{weatherData.list[0].speed} km/h</span>
+            ) : (
+              <span className="value">... km/h</span>
+            )}
           </div>
         </div>
 
