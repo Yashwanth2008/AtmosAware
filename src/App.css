@@ -40,7 +40,7 @@ body {
 }
 
 .left-info:hover {
-  transform: scale(1.1) perspective(2500px) rotateY(5deg);
+  transform: scale(1.1) perspective(2500px);
 }
 
 .pic-gradient {
