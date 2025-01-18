@@ -3,6 +3,7 @@ import "./App.css";
 function App() {
   const [weather, setWeather] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
+  const [city, setCity] = useState("Chennai");
 
   const api_key = "c712b05b078a11c8cfef9b3520f01017";
   const city_Name = "Chennai";
@@ -155,6 +156,11 @@ function App() {
         </ul>
 
         <div className="btn-container">
+          <input
+            className="city-input"
+            type="text"
+            placeholder="Enter the City"
+          />
           <button className="loc-button">Search Location</button>
         </div>
       </div>
