@@ -61,11 +61,7 @@ function App() {
           </div>
         </div>
         <div className="today-weather">
-          {weather !== "Rain" ? (
-            <i className="bx bx-sun"></i>
-          ) : (
-            <i class="bx bx-cloud-rain"></i>
-          )}
+          {weatherData && getWeatherIcon(weatherData.list[0].weather[0].main)}
           {weatherData ? (
             <h1 className="weather-temp">{weatherData.list[0].temp.min}°C</h1>
           ) : (
