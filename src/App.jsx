@@ -12,8 +12,10 @@ function App() {
   };
 
   const handleCity = () => {
-    if (input != null) {
+    if (input != "") {
       setCity(input);
+    } else {
+      setCity("Chennai");
     }
   };
 
