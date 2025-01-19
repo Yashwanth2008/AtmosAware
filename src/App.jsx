@@ -3,10 +3,22 @@ import "./App.css";
 function App() {
   const [weather, setWeather] = useState(null);
   const [weatherData, setWeatherData] = useState(null);
+  const [input, setInput] = useState("");
   const [city, setCity] = useState("Chennai");
 
+  const handleInput = (e) => {
+    console.log(e.target.value);
+    setInput(e.target.value);
+  };
+
+  const handleCity = () => {
+    if (input != null) {
+      setCity(input);
+    }
+  };
+
   const api_key = "c712b05b078a11c8cfef9b3520f01017";
-  const city_Name = "Chennai";
+  const city_Name = city;
   const currentWeatherApiURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city_Name}&appid=${api_key}&units=metric&cnt=5`;
 
   function convertTimestamp(timeStamp) {
@@ -21,6 +33,8 @@ function App() {
         return <i className="bx bx-cloud-rain"></i>;
       case "Clouds":
         return <i className="bx bx-cloud"></i>;
+      case "Snow":
+        return <i class="bx bx-cloud-snow"></i>;
       default:
         return <i className="bx bx-sun"></i>;
     }
@@ -48,7 +62,7 @@ function App() {
       }
     };
     fetchCurrentData();
-  }, []);
+  }, [currentWeatherApiURL]);
   return (
     <div className="container">
       <div className="left-info">
@@ -76,26 +90,26 @@ function App() {
         <div className="day-info">
           <div>
             <span className="title">PRECIPITATION</span>
-            {weatherData ? (
+            {weatherData && weatherData.list[0].rain ? (
               <span className="value">{weatherData.list[0].rain} mm</span>
             ) : (
-              <span className="value">4 mm</span>
+              <span className="value">- mm</span>
             )}
           </div>
           <div>
             <span className="title">HUMIDITY</span>
-            {weatherData ? (
-              <span className="value">{weatherData.list[0].humidity}</span>
+            {weatherData && weatherData.list[0].humidity ? (
+              <span className="value">{weatherData.list[0].humidity} %</span>
             ) : (
-              <span className="value">34 %</span>
+              <span className="value">- %</span>
             )}
           </div>
           <div>
             <span className="title">WIND SPEED</span>
-            {weatherData ? (
+            {weatherData && weatherData.list[0].speed ? (
               <span className="value">{weatherData.list[0].speed} km/h</span>
             ) : (
-              <span className="value">... km/h</span>
+              <span className="value">- km/h</span>
             )}
           </div>
         </div>
@@ -160,8 +174,11 @@ function App() {
             className="city-input"
             type="text"
             placeholder="Enter the City"
+            onChange={handleInput}
           />
-          <button className="loc-button">Search Location</button>
+          <button className="loc-button" onClick={handleCity}>
+            Search Location
+          </button>
         </div>
       </div>
     </div>
